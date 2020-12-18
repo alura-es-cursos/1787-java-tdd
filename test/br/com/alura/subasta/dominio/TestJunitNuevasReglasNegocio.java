@@ -11,20 +11,23 @@ public class TestJunitNuevasReglasNegocio {
 	
 	@Test
 	public void deberiaAceptarSolo1OfertaConsecutiva() {
+		// Preparacion
 		Usuario alexiz = new Usuario(2, "Alexiz");
 		Oferta oferta1 = new Oferta(alexiz, 3000.00);
 		Oferta oferta2 = new Oferta(alexiz, 50077.00);
 		
+		// Ejecucion
 		Subasta subasta = new Subasta("Auto del anho");
 		subasta.propone(oferta1);
 		subasta.propone(oferta2);
 		
+		// Verificacion
 		Assert.assertEquals(subasta.getOfertas().size(), 1);
 	}
 	
 	@Test
 	public void deberiaAceptar5ofertasComoMaximo() {
-		
+		// given
 		int cantidadMaximaAceptada = 10;
 		
 		Usuario alexiz = new Usuario(2, "Alexiz");
@@ -43,6 +46,7 @@ public class TestJunitNuevasReglasNegocio {
 		Oferta oferta10 = new Oferta(diego, 50077.00);
 		Oferta oferta11 = new Oferta(alexiz, 3000.00);
 		
+		// when
 		Subasta subasta = new Subasta("Auto del anho");
 		subasta.propone(oferta1);
 		subasta.propone(oferta2);
@@ -56,10 +60,10 @@ public class TestJunitNuevasReglasNegocio {
 		subasta.propone(oferta10);
 		subasta.propone(oferta11);
 		
+		// then
 		Assert.assertEquals(subasta.getOfertas().size(), cantidadMaximaAceptada);
 		
 	}
-	
 	
 	
 }

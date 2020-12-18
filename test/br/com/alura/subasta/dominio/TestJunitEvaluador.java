@@ -1,33 +1,34 @@
 package br.com.alura.subasta.dominio;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import junit.framework.Assert;
 
 public class TestJunitEvaluador {
 	
+	private Subasta subasta;
+	
+	@Before
+	public void prepararEscenario() {
+		System.out.println("PREPARANDO ESCENARIO");
+		
+		this.subasta = new CreadorDeSubasta().para("TV 55")
+				.oferta(new Usuario("Diego"), 300)
+				.oferta(new Usuario("Alexiz"), 500)
+				.oferta(new Usuario("Daniel"), 700)
+				.construir();
+	}
+	
 	// Primer escenario
 	@Test
 	public void deberiaRetornarElMayorValor() {
-		Usuario diego = new Usuario(1, "Diego");
-		Usuario alexiz = new Usuario(2, "Alexiz");
-		Usuario daniel = new Usuario(3, "Daniel");
 		
-		Oferta oferta1 = new Oferta(diego, 300.00);
-		Oferta oferta2 = new Oferta(alexiz, 500.00);
-		Oferta oferta3 = new Oferta(daniel, 700.00);
-		
-		Subasta subasta = new Subasta("Auto del anho");
-		subasta.propone(oferta1);
-		subasta.propone(oferta2);
-		subasta.propone(oferta3);
-		
+		// Ejecucion del metodo
 		Evaluador evaluador = new Evaluador();
 		evaluador.evalua(subasta);
-		
-//		System.out.println(evaluador.getMayorQueTodos());
-//		System.out.println(evaluador.getMenorQueTodos());
-		
+				
+		// Verificacion
 		Assert.assertEquals(700, evaluador.getMayorQueTodos(), 0.0001);
 		Assert.assertEquals(300, evaluador.getMenorQueTodos(), 0.0001);
 	
@@ -36,50 +37,27 @@ public class TestJunitEvaluador {
 	// test case de equivalencia
 	@Test
 	public void deberiaRetornarElMayorValorConNumerosDe5Cifras() {
-		Usuario diego = new Usuario(1, "Diego");
-		Usuario alexiz = new Usuario(2, "Alexiz");
-		Usuario daniel = new Usuario(3, "Daniel");
 		
-		Oferta oferta1 = new Oferta(diego, 30044.00);
-		Oferta oferta2 = new Oferta(alexiz, 50077.00);
-		Oferta oferta3 = new Oferta(daniel, 70088.00);
-		
-		Subasta subasta = new Subasta("Auto del anho");
-		subasta.propone(oferta1);
-		subasta.propone(oferta2);
-		subasta.propone(oferta3);
-		
+		// Ejecucion -> When
 		Evaluador evaluador = new Evaluador();
 		evaluador.evalua(subasta);
-		
-//		System.out.println(evaluador.getMayorQueTodos());
-//		System.out.println(evaluador.getMenorQueTodos());
-		
-		Assert.assertEquals(70088, evaluador.getMayorQueTodos(), 0.0001);
-		Assert.assertEquals(30044, evaluador.getMenorQueTodos(), 0.0001);
+
+		// Validacion -> Then
+		Assert.assertEquals(700, evaluador.getMayorQueTodos(), 0.0001);
+		Assert.assertEquals(300, evaluador.getMenorQueTodos(), 0.0001);
 
 	}
 	
 	@Test
 	public void deberiaRetornarLas3MayoresOfertas() {
-		Usuario diego = new Usuario(1, "Diego");
-		Usuario alexiz = new Usuario(2, "Alexiz");
-		Usuario daniel = new Usuario(3, "Daniel");
-		Usuario sandro = new Usuario(4, "Sandro");
-		Usuario eduardo = new Usuario(5, "Eduardo");
-		
-		Oferta oferta1 = new Oferta(diego, 3044.00);
-		Oferta oferta2 = new Oferta(alexiz, 50077.00);
-		Oferta oferta3 = new Oferta(daniel, 70088.00); // Mayor oferta
-		Oferta oferta4 = new Oferta(sandro, 54333.00);
-		Oferta oferta5 = new Oferta(eduardo, 9888.00);
-		
-		Subasta subasta = new Subasta("Auto del anho");
-		subasta.propone(oferta1);
-		subasta.propone(oferta2);
-		subasta.propone(oferta3);
-		subasta.propone(oferta4);
-		subasta.propone(oferta5);
+		// Preparacion
+		this.subasta = new CreadorDeSubasta().para("TV 55")
+				.oferta(new Usuario("Diego"), 3044.00)
+				.oferta(new Usuario("Alexiz"), 50077.00)
+				.oferta(new Usuario("Daniel"), 70088.00)
+				.oferta(new Usuario("Sandro"), 54333.00)
+				.oferta(new Usuario("Eduardo"), 9888.00)
+				.construir();
 		
 		Evaluador evaluador = new Evaluador();
 		evaluador.evalua(subasta);
