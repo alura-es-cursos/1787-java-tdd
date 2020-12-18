@@ -33,6 +33,7 @@ public class TestJunitEvaluador {
 	
 	}
 	
+	// test case de equivalencia
 	@Test
 	public void deberiaRetornarElMayorValorConNumerosDe5Cifras() {
 		Usuario diego = new Usuario(1, "Diego");
@@ -89,5 +90,4 @@ public class TestJunitEvaluador {
 		Assert.assertEquals(evaluador.getMayoresOfertas().get(2).getValor(), 50077.00);
 	}
 	
-
 }

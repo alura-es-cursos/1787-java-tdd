@@ -15,7 +15,25 @@ public class Subasta {
 	}
 	
 	public void propone(Oferta oferta) {
-		ofertas.add(oferta);
+		int total = getTotalOfertasUsuario(oferta.getUsuario(), ofertas);
+		if(ofertas.isEmpty() || 
+				esElMismoUsuarioAnterior(oferta.getUsuario())
+				&& total < 5) {
+			ofertas.add(oferta);
+	    }
+		
+	}
+	
+	private boolean esElMismoUsuarioAnterior(Usuario usuario) {
+		return !ofertas.get(ofertas.size()-1).getUsuario().equals(usuario);
+	}
+	
+	private int getTotalOfertasUsuario(Usuario usuario, List<Oferta> ofertas) {
+		int total = 0;
+	    for(Oferta l : ofertas) {
+	        if(l.getUsuario().equals(usuario)) total++;
+	    }
+	    return total;
 	}
 
 	public String getDescripcion() {
