@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 public class Evaluador {
 	
 	private double mayorQueTodos = Double.NEGATIVE_INFINITY;
@@ -12,6 +14,9 @@ public class Evaluador {
 	private List<Oferta> mayoresOfertas = new ArrayList<Oferta>();
 	
 	public void evalua(Subasta subasta) {
+		if (subasta.getOfertas().isEmpty()) {
+			throw new RuntimeException("La subasta no tiene ofertas");
+		}
 		for (Oferta oferta : subasta.getOfertas()) {
 			if (oferta.getValor() > mayorQueTodos) {
 				mayorQueTodos = oferta.getValor();

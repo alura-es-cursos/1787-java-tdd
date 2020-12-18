@@ -1,5 +1,8 @@
 package br.com.alura.subasta.dominio;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.CoreMatchers.equalTo;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,9 +32,8 @@ public class TestJunitEvaluador {
 		evaluador.evalua(subasta);
 				
 		// Verificacion
-		Assert.assertEquals(700, evaluador.getMayorQueTodos(), 0.0001);
-		Assert.assertEquals(300, evaluador.getMenorQueTodos(), 0.0001);
-	
+		assertThat(evaluador.getMayorQueTodos(), equalTo(700.0));
+		assertThat(evaluador.getMenorQueTodos(), equalTo(300.0));
 	}
 	
 	// test case de equivalencia
@@ -43,9 +45,8 @@ public class TestJunitEvaluador {
 		evaluador.evalua(subasta);
 
 		// Validacion -> Then
-		Assert.assertEquals(700, evaluador.getMayorQueTodos(), 0.0001);
 		Assert.assertEquals(300, evaluador.getMenorQueTodos(), 0.0001);
-
+		assertThat(evaluador.getMayorQueTodos(), equalTo(700.0));
 	}
 	
 	@Test
