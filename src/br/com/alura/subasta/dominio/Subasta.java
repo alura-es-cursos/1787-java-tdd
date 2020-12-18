@@ -14,7 +14,7 @@ public class Subasta {
 		this.ofertas = new ArrayList<Oferta>();
 	}
 	
-	public void propoe(Oferta oferta) {
+	public void propone(Oferta oferta) {
 		ofertas.add(oferta);
 	}
 
